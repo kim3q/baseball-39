@@ -44,14 +44,14 @@ public:
 		}
 	}
 
-	bool checkSolved(int strikes)
+	bool checkSolved()
 	{
 		if (strikes == 3)
 			return true;
 		return false;
 	}
 
-	void checkStrikesandballs(string guessNumber, int& strikes, int& balls)
+	void checkStrikesandballs(string guessNumber)
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -70,15 +70,9 @@ public:
 	Result guess(string guessNumber) {
 		assertIllegalArgument(guessNumber);
 
-		if (guessNumber == question) {
-			return { true, 3, 0 };
-		}
-		bool solved = false;
-		int strikes = 0;
-		int balls = 0;
-		checkStrikesandballs(guessNumber, strikes, balls);
+		checkStrikesandballs(guessNumber);
 
-		solved = checkSolved(strikes);
+		solved = checkSolved();
 
 		return { solved, strikes, balls };
 
@@ -86,4 +80,7 @@ public:
 
 private:
 	string question;
+	bool solved = false;
+	int strikes = 0;
+	int balls = 0;
 };
